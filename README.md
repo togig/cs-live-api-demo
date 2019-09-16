@@ -13,4 +13,8 @@ A Restful API written in Node.js using express framework.
 2. Install the application: `npm install`
 3. Place your own MongoDB URI in `config/database.js`
 3. Start server with: `node server.js`
-4. View in browser at `http://localhost:8080`
+4. View in browser at `http://localhost:3000`
+
+## Preview Screen
+
+https://pasteboard.co/IxDdc88.png
