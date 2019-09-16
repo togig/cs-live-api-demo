@@ -1,6 +1,6 @@
 // Application Core Settings ->
 // -- Setting up static values
-const port = process.env.port || 8080;
+const port = process.env.port || 3000;
 
 // -- Gathering requirements
 const db = require(__dirname + '/_config/database');

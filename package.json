@@ -4,6 +4,7 @@
   "description": "Case Study - Live API Demo",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "node index.js",
     "test": "jest --verbose ./_tests"
   },
