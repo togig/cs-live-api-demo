@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Case Study - Live API Demo</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">	
+	<style>
+		.navbar { background-color: #5D3EBC; }
+		.navbar a,.navbar h2 { color: #FFD10D !important; }
+	</style>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg">
+		<a class="navbar-brand" href="#">
+			<img src="https://getir.com/img/bimutluluk.png" alt="" srcset="" height="90">
+		</a>	  
+		<h2 class="w-100">Case Study - Live API Demo <span class="float-right">v1.0.0</span></h2>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<form class="pt-3" id="inputFields">
+					<div class="form-group">
+						<label for="startDate">Start Date</label>
+						<input type="date" class="form-control" id="startDate" placeholder="2016-07-06" value="2016-07-06">
+					</div>
+					<div class="form-group">
+						<label for="endDate">End Date</label>
+						<input type="date" class="form-control" id="endDate" placeholder="2016-07-08" value="2016-07-08">
+					</div>
+					<div class="form-group">
+						<label for="minCount">Min Count</label>
+						<input type="number" class="form-control" id="minCount" placeholder="2700" value="2700">
+					</div>
+					<div class="form-group">
+						<label for="maxCount">Max Count</label>
+						<input type="number" class="form-control" id="maxCount" placeholder="3000" value="3000">
+					</div>
+					<button type="button" class="btn btn-primary float-right" id="sendInputFields">Submit</button>
+				</form>
+			</div>
+			<div class="col">
+				<div class="form-group mt-3">
+					<label for="resultScreen">Result Screen</label>
+					<textarea class="form-control" id="resultScreen" rows="20"></textarea>
+				</div>
+			</div>
+		</div>
+		<h4>Action Logs</h4>
+		<div class="w-100" id="log">&nbsp;</div>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+
+			function getLog() {
+				$.ajax({
+					type: "GET",
+					url: "log",
+					success: (res) => {
+						console.log('Success');
+						$('#log').html(res);
+					},
+					error: (res) => {
+						console.log('Failed');
+						$('#log').html(res);
+					},
+					dataType: "text"
+				});
+			}
+
+			getLog();
+
+			$('#sendInputFields').on('click', function() {
+
+				$('#resultScreen').text('');
+
+				$.ajax({
+					type: "POST",
+					url: "api/v1/records",
+					data: {
+						startDate: 	$('#startDate').val(),
+						endDate: 	$('#endDate').val(),
+						minCount: 	$('#minCount').val(),
+						maxCount: 	$('#maxCount').val()
+					},
+					success: (res) => {
+						console.log('Success');
+						$('#resultScreen').html(JSON.stringify(res));
+
+						getLog();
+					},
+					error: (res) => {
+						console.log('Failed');
+						$('#resultScreen').html(JSON.stringify(res));
+					},
+					dataType: "json"
+				});
+				
+			});
+
+		});
+	</script>
+</body>
+</html>
