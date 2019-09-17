@@ -12,7 +12,7 @@ A Restful API written in Node.js using express framework.
 1. Clone the repository: `git clone git@github.com:togig/cs-live-api-demo.git`
 2. Install the application: `npm install`
 3. Place your own MongoDB URI in `config/database.js`
-3. Start server with: `node server.js`
+3. Start server with: `node index.js`
 4. View in browser at `http://localhost:3000`
 
 ## Preview Screen
